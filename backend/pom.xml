@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>payvero</name>
 	<description>Payvero — Distributed Digital Payment &amp; Financial Ledger Platform</description>
-	<url>https://github.com/radhikapatil17/payvero</url>
+	<url>https://github.com/radhikapatil17/Payvero</url>
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -27,9 +27,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git://github.com/radhikapatil17/payvero.git</connection>
-		<developerConnection>scm:git:ssh://github.com:radhikapatil17/payvero.git</developerConnection>
-		<url>https://github.com/radhikapatil17/payvero</url>
+		<connection>scm:git:git://github.com/radhikapatil17/Payvero.git</connection>
+		<developerConnection>scm:git:ssh://github.com:radhikapatil17/Payvero.git</developerConnection>
+		<url>https://github.com/radhikapatil17/Payvero</url>
 	</scm>
 	<properties>
 		<java.version>21</java.version>

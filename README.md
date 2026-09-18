@@ -4,7 +4,7 @@
 
 ### Distributed Digital Payment & Financial Ledger Platform
 
-[![CI Pipeline](https://github.com/radhikapatil17/payvero/actions/workflows/ci.yml/badge.svg)](https://github.com/radhikapatil17/payvero/actions/workflows/ci.yml)
+[![CI Pipeline](https://github.com/radhikapatil17/Payvero/actions/workflows/ci.yml/badge.svg)](https://github.com/radhikapatil17/Payvero/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Java 21](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Spring Boot 4.1](https://img.shields.io/badge/Spring_Boot-4.1.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
