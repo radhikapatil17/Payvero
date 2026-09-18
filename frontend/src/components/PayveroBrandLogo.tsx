@@ -67,7 +67,7 @@ export const PayveroBrandLogo: React.FC<PayveroBrandLogoProps> = ({
       {!iconOnly && (
         <div className="flex flex-col">
           <span className={`font-black tracking-tight text-slate-100 ${fontClass}`}>
-            PAY<span className="text-emerald-400">VERO</span>
+            Payvero
           </span>
           <span className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase -mt-1">
             Accounting Engine

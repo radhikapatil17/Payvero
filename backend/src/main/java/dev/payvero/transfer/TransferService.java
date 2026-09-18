@@ -36,7 +36,7 @@ public class TransferService {
     private final TransferRateLimiter rateLimiter;
     private final TransferProperties properties;
     private final ObjectMapper objectMapper;
-    private final dev.payvero.api.LedgerMetrics metrics;
+    private final dev.payvero.api.PayveroMetrics metrics;
 
     public TransferService(TransferWriter writer,
                            TransferRepository transferRepository,
@@ -45,7 +45,7 @@ public class TransferService {
                            TransferRateLimiter rateLimiter,
                            TransferProperties properties,
                            ObjectMapper objectMapper,
-                           dev.payvero.api.LedgerMetrics metrics) {
+                           dev.payvero.api.PayveroMetrics metrics) {
         this.metrics = metrics;
         this.writer = writer;
         this.transferRepository = transferRepository;

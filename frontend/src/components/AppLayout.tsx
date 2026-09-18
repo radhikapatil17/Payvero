@@ -10,8 +10,8 @@ type NavItem = { to: string; label: string; icon: React.ComponentType<{ classNam
 
 const NAV: NavItem[] = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/transfers', label: 'Send & Payments', icon: ArrowRightLeft },
-  { to: '/statements', label: 'Accounting & Statements', icon: FileText },
+  { to: '/transfers', label: 'Transfers', icon: ArrowRightLeft },
+  { to: '/statements', label: 'Statements', icon: FileText },
 ]
 
 const ADMIN_NAV: NavItem[] = [

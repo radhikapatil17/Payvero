@@ -39,7 +39,7 @@ public class FraudDetectionService {
     private final FraudProperties properties;
     private final ObjectMapper objectMapper;
     private final Clock clock;
-    private final dev.payvero.api.LedgerMetrics metrics;
+    private final dev.payvero.api.PayveroMetrics metrics;
 
     public FraudDetectionService(TransferRepository transfers,
                                  FraudFlagRepository flags,
@@ -48,7 +48,7 @@ public class FraudDetectionService {
                                  FraudProperties properties,
                                  ObjectMapper objectMapper,
                                  Clock clock,
-                                 dev.payvero.api.LedgerMetrics metrics) {
+                                 dev.payvero.api.PayveroMetrics metrics) {
         this.clock = clock;
         this.metrics = metrics;
         this.transfers = transfers;

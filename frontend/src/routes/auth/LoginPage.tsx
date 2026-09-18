@@ -68,7 +68,7 @@ export function LoginPage() {
         <FormAlert message={errors.root?.message} />
 
         <Field
-          label="Email address"
+          label="Email"
           type="email"
           autoComplete="email"
           autoFocus

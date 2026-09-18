@@ -91,14 +91,14 @@ export function TransferForm({
           <FormAlert message={errors.root?.message} />
 
           <Field
-            label="Recipient Account UUID"
+            label="Recipient account id"
             placeholder="00000000-0000-0000-0000-000000000000"
             autoComplete="off"
             error={errors.destinationAccountId?.message}
             {...register('destinationAccountId')}
           />
           <Field
-            label={`Transfer Amount (${currency})`}
+            label={`Amount (${currency})`}
             inputMode="decimal"
             placeholder="125.50"
             error={errors.amount?.message}
@@ -129,7 +129,7 @@ export function TransferForm({
               disabled={isSubmitting}
               className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold shadow-md shadow-emerald-500/20 transition-all"
             >
-              {isSubmitting ? 'Processing Payment...' : canRetry ? 'Retry Transfer' : 'Execute Payment'}
+              {isSubmitting ? 'Sending...' : canRetry ? 'Try again' : 'Send transfer'}
             </Button>
             {canRetry && (
               <p className="text-xs text-amber-400/90 font-medium">

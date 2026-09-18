@@ -28,7 +28,7 @@ export function DashboardPage() {
         <PageHeading />
         <EmptyState
           icon={<Landmark className="size-6 text-emerald-400" />}
-          title="No active financial account"
+          title="No account yet"
           description="Initialize your Payvero digital accounting account to start processing transactions."
           action={
             <Link
@@ -44,18 +44,18 @@ export function DashboardPage() {
   }
 
   const balanceMinorUnits = balance.data?.derivedBalanceMinorUnits ?? account.balanceMinorUnits
-  const transferCount = transfers.data?.totalElements ?? 0
+  const transferCount = transfers.data?.page.totalElements ?? 0
 
   return (
     <section className="space-y-6">
       <PageHeading />
 
       <div className="grid gap-4 md:grid-cols-3">
-        {/* Available Balance Card */}
+        {/* Available balance Card */}
         <Card className="border-slate-800 bg-slate-900/80 shadow-xl backdrop-blur-md">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Available Balance
+              Available balance
             </CardTitle>
             <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-400 border border-emerald-500/20">
               <Landmark className="size-4" />
@@ -82,7 +82,7 @@ export function DashboardPage() {
             )}
             {balance.data && !balance.data.consistent ? (
               <p role="alert" className="mt-2 text-xs font-medium text-rose-400 bg-rose-500/10 p-2 rounded-md border border-rose-500/20">
-                Notice: Balance invariant check pending reconciliation.
+                This balance disagrees with the journal and is being investigated.
               </p>
             ) : null}
           </CardContent>
@@ -183,8 +183,8 @@ export function DashboardPage() {
           ) : (
             <EmptyState
               icon={<Receipt className="size-6 text-slate-500" />}
-              title="No transactions yet"
-              description="Initiate payments or deposits to see your auditable double-entry history."
+              title="No activity yet"
+              description="Money you send or receive will appear here."
             />
           )}
         </CardContent>

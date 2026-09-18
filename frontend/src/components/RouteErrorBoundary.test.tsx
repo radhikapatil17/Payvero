@@ -150,7 +150,7 @@ describe('scope of the failure', () => {
 
     // The shell survived: the brand and every nav link are still on screen.
     expect(screen.getByText('Payvero')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Transfers' })).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: 'Transfers' })[0]).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /sign out/i })).toBeInTheDocument()
   })
 
@@ -172,7 +172,7 @@ describe('scope of the failure', () => {
     await screen.findByTestId('route-error')
 
     const user = userEvent.setup()
-    await user.click(screen.getByRole('link', { name: 'Transfers' }))
+    await user.click(screen.getAllByRole('link', { name: 'Transfers' })[0])
 
     expect(await screen.findByText('Transfers screen')).toBeInTheDocument()
     await waitFor(() => expect(screen.queryByTestId('route-error')).not.toBeInTheDocument())
