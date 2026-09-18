@@ -77,7 +77,7 @@ export function AppLayout() {
         </div>
 
         {/* Mobile Navigation bar */}
-        <div className="flex md:hidden overflow-x-auto border-t border-slate-800/60 px-2 py-1.5 bg-slate-950/90">
+        <div aria-hidden="true" className="flex md:hidden overflow-x-auto border-t border-slate-800/60 px-2 py-1.5 bg-slate-950/90">
           {links.map((link) => {
             const Icon = link.icon
             return (
