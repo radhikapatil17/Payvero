@@ -32,7 +32,7 @@ jobs:
         run: npm run lint
       - name: Test
         working-directory: frontend
-        run: npm run test
+        run: npm run test -- --pool=forks
       # Runs `tsc -b` before Vite, so type errors fail here too.
       - name: Build
         working-directory: frontend
