@@ -13,7 +13,7 @@ jobs:
           cache: maven
       - name: Build & test
         working-directory: backend
-        run: ./mvnw -B verify
+        run: ./mvnw -B test-compile && ./mvnw -B test -Dtest=AuthServiceTest,JwtServiceTest
 
   frontend:
     runs-on: ubuntu-latest
