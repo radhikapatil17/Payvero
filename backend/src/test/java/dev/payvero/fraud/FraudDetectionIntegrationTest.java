@@ -122,7 +122,7 @@ class FraudDetectionIntegrationTest {
     void tearDown() {
         jdbcTemplate.update("DELETE FROM fraud_flags");
         jdbcTemplate.execute("TRUNCATE audit_log");
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM outbox");
         jdbcTemplate.update("DELETE FROM idempotency_keys");
         jdbcTemplate.update("DELETE FROM transfers");

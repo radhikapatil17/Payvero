@@ -84,7 +84,7 @@ class StatementServiceIntegrationTest {
     void tearDown() {
         jdbcTemplate.execute("TRUNCATE statements");
         jdbcTemplate.execute("TRUNCATE audit_log");
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM fraud_flags");
         jdbcTemplate.update("DELETE FROM outbox");
         jdbcTemplate.update("DELETE FROM idempotency_keys");
@@ -317,11 +317,11 @@ class StatementServiceIntegrationTest {
                 """, transferId, from, to, amount, when, when);
 
         jdbcTemplate.update("""
-                INSERT INTO ledger_entries (transfer_id, account_id, direction, amount, currency, created_at)
+                INSERT INTO journal_entries (transfer_id, account_id, direction, amount, currency, created_at)
                 VALUES (?, ?, 'DEBIT', ?, 'USD', ?)
                 """, transferId, from, amount, when);
         jdbcTemplate.update("""
-                INSERT INTO ledger_entries (transfer_id, account_id, direction, amount, currency, created_at)
+                INSERT INTO journal_entries (transfer_id, account_id, direction, amount, currency, created_at)
                 VALUES (?, ?, 'CREDIT', ?, 'USD', ?)
                 """, transferId, to, amount, when);
 

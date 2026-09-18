@@ -88,10 +88,10 @@ class OutboxIntegrationTest {
 
     @AfterEach
     void tearDown() {
-        // audit_log and ledger_entries both reject row level deletes, so both
+        // audit_log and journal_entries both reject row level deletes, so both
         // are cleared with TRUNCATE, which fires no row trigger.
         jdbcTemplate.execute("TRUNCATE audit_log");
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM outbox");
         jdbcTemplate.update("DELETE FROM idempotency_keys");
         jdbcTemplate.update("DELETE FROM transfers");

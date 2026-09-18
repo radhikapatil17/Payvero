@@ -52,7 +52,7 @@ class TransferControllerIntegrationTest {
     void tearDown() {
         jdbcTemplate.execute("TRUNCATE statements");
         jdbcTemplate.execute("TRUNCATE audit_log");
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM fraud_flags");
         jdbcTemplate.update("DELETE FROM outbox");
         jdbcTemplate.update("DELETE FROM idempotency_keys");

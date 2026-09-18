@@ -72,7 +72,7 @@ class AccountingServiceIntegrationTest {
         // TRUNCATE rather than DELETE for entries: the append-only trigger
         // rejects row level deletes, and TRUNCATE fires no row trigger. The
         // treasury is seeded by the migration, so it is reset rather than removed.
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM idempotency_keys");
         jdbcTemplate.update("DELETE FROM transfers");
         jdbcTemplate.update("DELETE FROM accounts WHERE account_type = 'USER'");
@@ -154,7 +154,7 @@ class AccountingServiceIntegrationTest {
         // credits no longer agree. Attached to a real transfer, because the
         // foreign key now insists every entry names one.
         jdbcTemplate.update("""
-                INSERT INTO ledger_entries (transfer_id, account_id, direction, amount, currency)
+                INSERT INTO journal_entries (transfer_id, account_id, direction, amount, currency)
                 VALUES (?, ?, 'CREDIT', 1234, 'USD')
                 """, transferId, aliceId);
 
@@ -183,14 +183,14 @@ class AccountingServiceIntegrationTest {
         long entriesBefore = ledgerEntryRepository.count();
 
         assertThatThrownBy(() -> jdbcTemplate.update("""
-                INSERT INTO ledger_entries (transfer_id, account_id, direction, amount, currency)
+                INSERT INTO journal_entries (transfer_id, account_id, direction, amount, currency)
                 VALUES (?, ?, 'CREDIT', 0, 'USD')
                 """, transferId, aliceId))
                 .isInstanceOf(DataIntegrityViolationException.class)
                 .hasMessageContaining("amount");
 
         assertThatThrownBy(() -> jdbcTemplate.update("""
-                INSERT INTO ledger_entries (transfer_id, account_id, direction, amount, currency)
+                INSERT INTO journal_entries (transfer_id, account_id, direction, amount, currency)
                 VALUES (?, ?, 'DEBIT', -500, 'USD')
                 """, transferId, aliceId))
                 .isInstanceOf(DataIntegrityViolationException.class)
@@ -204,7 +204,7 @@ class AccountingServiceIntegrationTest {
         UUID transferId = deposit(aliceUserId, aliceId, 1_000);
 
         assertThatThrownBy(() -> jdbcTemplate.update("""
-                INSERT INTO ledger_entries (transfer_id, account_id, direction, amount, currency)
+                INSERT INTO journal_entries (transfer_id, account_id, direction, amount, currency)
                 VALUES (?, ?, 'SIDEWAYS', 100, 'USD')
                 """, transferId, aliceId))
                 .isInstanceOf(DataIntegrityViolationException.class)
@@ -221,12 +221,12 @@ class AccountingServiceIntegrationTest {
         // Postgres raises P0001, which Spring cannot categorise further, so the
         // message is the meaningful assertion rather than the exception subtype.
         assertThatThrownBy(() -> jdbcTemplate.update(
-                "UPDATE ledger_entries SET amount = 1 WHERE id = ?", entryId))
+                "UPDATE journal_entries SET amount = 1 WHERE id = ?", entryId))
                 .isInstanceOf(DataAccessException.class)
                 .hasMessageContaining("append-only");
 
         assertThatThrownBy(() -> jdbcTemplate.update(
-                "DELETE FROM ledger_entries WHERE id = ?", entryId))
+                "DELETE FROM journal_entries WHERE id = ?", entryId))
                 .isInstanceOf(DataAccessException.class)
                 .hasMessageContaining("append-only");
 

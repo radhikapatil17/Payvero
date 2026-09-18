@@ -65,7 +65,7 @@ class TransferRateLimitIntegrationTest {
 
     @AfterEach
     void tearDown() {
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM idempotency_keys");
         jdbcTemplate.update("DELETE FROM transfers");
         jdbcTemplate.update("DELETE FROM accounts WHERE account_type = 'USER'");

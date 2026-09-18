@@ -77,7 +77,7 @@ class AuditQueryServiceIntegrationTest {
     @AfterEach
     void tearDown() {
         jdbcTemplate.execute("TRUNCATE audit_log");
-        jdbcTemplate.execute("TRUNCATE ledger_entries");
+        jdbcTemplate.execute("TRUNCATE journal_entries");
         jdbcTemplate.update("DELETE FROM outbox");
         jdbcTemplate.update("DELETE FROM transfers");
         jdbcTemplate.update("DELETE FROM accounts WHERE account_type = 'USER'");
