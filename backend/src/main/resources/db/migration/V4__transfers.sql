@@ -20,8 +20,8 @@ CREATE INDEX idx_transfers_created_at ON transfers(created_at DESC);
 -- Deferred from V3, where transfers did not exist yet. Every ledger entry now
 -- has to name a real transfer, so there is no way to post entries that belong
 -- to nothing: a deposit is a transfer from the treasury, not a special case.
-ALTER TABLE ledger_entries
-    ADD CONSTRAINT ledger_entries_transfer_id_fkey
+ALTER TABLE journal_entries
+    ADD CONSTRAINT journal_entries_transfer_id_fkey
     FOREIGN KEY (transfer_id) REFERENCES transfers(id) ON DELETE RESTRICT;
 
 -- The stored response is what makes a retry genuinely free: the second caller

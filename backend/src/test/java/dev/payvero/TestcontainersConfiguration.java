@@ -22,8 +22,8 @@ public class TestcontainersConfiguration {
 	@ServiceConnection
 	PostgreSQLContainer<?> postgresContainer() {
 		return new PostgreSQLContainer<>(
-				DockerImageName.parse("postgres:16-alpine"))
-				.withDatabaseName("payvero").withUsername("payvero")
+				DockerImageName.parse("pgvector/pgvector:pg16").asCompatibleSubstituteFor("postgres"))
+				.withUsername("payvero")
 				.withPassword("payvero_dev");
 	}
 
