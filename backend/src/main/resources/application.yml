@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: payvero
+  datasource:
+    # The runtime connection uses the least privilege role: it can read and
+    # write rows but cannot alter schema, and so cannot disable the append-only
+    # triggers on journal_entries and audit_log.
+    url: ${PAYVERO_DB_URL:jdbc:postgresql://localhost:5432/payvero}
+    username: ${PAYVERO_DB_USER:payvero_app}
+    password: ${PAYVERO_DB_PASSWORD:payvero_app_dev}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    user: ${PAYVERO_DB_MIGRATION_USER:payvero}
+    password: ${PAYVERO_DB_MIGRATION_PASSWORD:payvero_dev}
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+    producer:
+      acks: all
+  data:
+    redis:
+      host: localhost
+      port: 6379
+    web:
+      pageable:
+        serialization-mode: VIA_DTO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+payvero:
+  web:
+    allowed-origins: ${PAYVERO_ALLOWED_ORIGINS:http://localhost:5173}
+  jwt:
+    secret: ${PAYVERO_JWT_SECRET:dev-only-secret-change-me-must-be-at-least-32-bytes-long}
+    access-token-ttl: PT5M
+    refresh-token-ttl: P7D
+  accounting:
+    max-movement-minor-units: 100000000
+  transfer:
+    max-optimistic-retries: 3
+    settle-after: PT1S
+    rate-limit-window: PT1M
+    rate-limit-per-window: 60
+  settlement:
+    enabled: true
+    poll-interval: 1000
+  fraud:
+    window: PT1M
+    max-transfers-per-window: 5
+    max-amount-per-window: 500000
+    max-optimistic-retries: 3
+    consumer-group: payvero-fraud
+  outbox:
+    enabled: true
+    poll-interval: 500
+    transfer-topic: transfer.events
+    ledger-topic: journal.audit
+    consumer-group: payvero-audit
+    send-timeout: PT5S
